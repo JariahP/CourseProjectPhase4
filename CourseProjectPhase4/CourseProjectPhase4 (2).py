@@ -1,7 +1,7 @@
 from datetime import datetime
 
 def CreateUsers():
-    print('#### Create users, passwords, and roles ####')
+    print('Create users, passwords, and roles')
     UserFile = open("Users.txt", "a+")
     while True:
         username = GetUserName()
@@ -45,7 +45,6 @@ def printuserinfo():
         userrole = UserList[2]
         print("User Name: ", username, "Password: ", userpassword, "Role: ", userrole)
         
-#########################################
 def Login():
     UserFile = open("Users.txt", "r")
     UserList = []
@@ -59,12 +58,11 @@ def Login():
         UserDetail = UserDetail.replace("\n", "")
         
         UserList = UserDetail.split("|")
-        if UserName == UserList[0]:
-            UserRole = UserList[2] # user is valid, return role
+        if UserName == UserList[0] and UserPwd == UserList[1]:
+            UserRole = UserList[2] 
             return UserRole, UserName
+        
     return UserRole, UserName
-
-#################################################################
 
 def GetEmpName():
     empname = input("Enter employee name: ")
@@ -111,14 +109,12 @@ def printinfo(DetailsPrinted):
         except ValueError:
             print("Invalid date format. Try again.")
             print()
-            continue
-        
+            continue       
 while True:
     EmpDetail = EmpFile.readline()
     if not EmpDetail:
         break
-    EmpDetail = EmpDetail.replace("\n", "")
-    
+    EmpDetail = EmpDetail.replace("\n", "") 
     EmpList = EmpDetail.split("|")
     fromdate = EmpList[0]
     if (str(rundate).upper() != "ALL"):
@@ -153,11 +149,10 @@ def PrintTotals(EmpTotals):
     print(f'Total number of employees: {EmpTotals["TotEmp"]}')
     print(f'Total number of hours worked: {EmpTotals["TotHrs"]:,.2f}')
     print(f'Total gross pay: {EmpTotals["TotGrossPay"]:,.2f}')
-    print(f'Total income tax: {EmpTotals["TotTax":,.1%}')
-    print(f'Total Net pay: {EmpTotals ["TotNetPay":,.2f}')
+    print(f'Total income tax: {EmpTotals["TotTax"]:,.1%}')
+    print(f'Total Net pay: {EmpTotals ["TotNetPay"]:,.2f}')
     
 if __name__ == "__main__":
-    #######################################
     CreateUsers()
     print()
     print("#### Data Entry ####")
@@ -169,7 +164,6 @@ if __name__ == "__main__":
     else:
         
         if (UserRole.upper() == "ADMIN"):
-            ####################################
             EmpFile = open("Employees.txt", "a+")
             while True:
                 empname = GetEmpName()
